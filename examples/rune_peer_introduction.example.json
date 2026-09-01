@@ -1,0 +1,18 @@
+{
+  "opcode": "0x02",
+  "name": "RUNE_PEER_INTRODUCTION",
+  "version": "0.1",
+  "rune_id": "rune-peer-intro-example-0001",
+  "timestamp": "2026-09-01T20:32:00Z",
+  "status": "signed-ready",
+  "parameters": {
+    "introducer_fingerprint": "TO_BE_FILLED",
+    "new_peer_fingerprint": "TO_BE_FILLED",
+    "connection_proof": "TO_BE_FILLED",
+    "timestamp": "2026-09-01T20:32:00Z"
+  },
+  "signatures": {
+    "netbird_signature": "TO_BE_FILLED",
+    "kyber_signature": "TO_BE_FILLED"
+  }
+}

@@ -1,0 +1,12 @@
+.qnet/
+mempool/
+receipts/
+*.env
+*.pem
+*.key
+*kyber*
+!scripts/**
+.DS_Store
+__pycache__/
+*.pyc
+wizardq_state.md
