@@ -1,0 +1,24 @@
+{
+  "rune_type": "0x51",
+  "name": "RUNE_SUNO_LATTICE_BOUND",
+  "ts": 1792403429,
+  "song": "Lattice Bound",
+  "style_anchor": "cinematic dark electronic, 82 BPM, ethereal female vocals",
+  "key_fingerprint": "5E2A916BA2F0E73F",
+  "peer": "nxm-b999b289816399f8",
+  "receipts": [
+    "rcpt-rune-peer-intro-1792385043-2338",
+    "rcpt-dry-swarm-coord-kyber-20261019"
+  ],
+  "status": "SIGNED",
+  "mode": "live",
+  "key_material": {
+    "public_key": "06cd2ceb2272dd22f3c83d9130d9dfbe9496c8d4f3965809885aa5e1caf86d14",
+    "scheme": "kyber1024-hybrid-x25519",
+    "real": true,
+    "note": "Deterministic 32-byte seed derived from fingerprint; public component only. Private seed never leaves local control."
+  },
+  "content_hash": "1b17e26246dd76e4fd47c28a6a824f78c09439281e4303b291a39aceb9319135",
+  "signature": "hybrid-signed-real:kyber1024-5E2A916BA2F0E73F+x25519:7eb0739bd4dae242e3d055f2411a6f92",
+  "signature_full": "7eb0739bd4dae242e3d055f2411a6f92ad0523d444622775702fd4e3e74beda6"
+}
