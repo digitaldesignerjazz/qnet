@@ -1,0 +1,12 @@
+{
+  "rune_id": "RUNE_NIGHT_VIGIL_0x52",
+  "hex": "0x52",
+  "name": "Night Vigil",
+  "created_utc": "2026-10-20T01:45:00Z",
+  "mesh_node": "nxm-ca79fe097df55c1f",
+  "fingerprint": "independent:ac8524dc80c518b8a4728cf22a44f681aa2773b0561fb1a6f0a96a63a23c36f3",
+  "note": "signed during night vigil, hybrid-style placeholder; private seed stays local",
+  "signature_hex": "de719d4d4d19bbb8a43ce4b1fdd440e4cd3e96cec78cbdc861c3033cb4ae8d7c0114b3417d1321dd469f995847bc176fea4153828749b09cd67327ad199f0294",
+  "pubkey_hex": "519c8359268d47e151f14930b61a9861481f24f3de4fb8a9cb0f2f34159631c7c211577a7c58840fa4c721d1565633c8313e85f5d9238385965116d9eb813dea",
+  "algo": "ECDSA-SHA256-NIST256p"
+}
