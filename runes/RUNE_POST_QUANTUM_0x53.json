@@ -1,0 +1,11 @@
+{
+  "rune_id": "RUNE_POST_QUANTUM_0x53",
+  "hex": "0x53",
+  "name": "Post-Quantum Step",
+  "created_utc": "2026-10-20T01:50:00Z",
+  "mesh_node": "nxm-ca79fe097df55c1f",
+  "fingerprint": "independent:ac8524dc80c518b8a4728cf22a44f681aa2773b0561fb1a6f0a96a63a23c36f3",
+  "algo": "SHA256-commitment (no PQ lib available in REPL)",
+  "seed_hex": "a1a5098e1607166e648314de9531bf3c9f15927c7e1f74e1042f0c9665e65321",
+  "note": "placeholder until kyber-py installed on Hannover-Box"
+}
