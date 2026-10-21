@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # indigo_node_boot.sh — Indigo-Lila Node PC im Intrazell-Netzwerk
 # Farbe: Indigo #4B0082 / Lila #C77DFF | Rune: 0x53
-# v3.2: optionaler Netbird-Push via NETBIRD_PEER_IP, bessere Logs
+# v3.3: konkreter Netbird HTTP-Push (curl POST) über Peer-IP
 set -euo pipefail
 
 NODE_ID="${NODE_ID:-indigo-node-pc}"
@@ -13,8 +13,10 @@ STATUS_DIR="${STATUS_DIR:-status}"
 PEER_DIR="$STATUS_DIR/peers"
 mkdir -p "$STATUS_DIR" "$PEER_DIR"
 
-# Optional: Peer-IP für direkten Push (z. B. Sandbox)
+# Peer-Integration (Netbird)
 NETBIRD_PEER_IP="${NETBIRD_PEER_IP:-}"
+NETBIRD_PEER_PORT="${NETBIRD_PEER_PORT:-8080}"
+NETBIRD_PEER_PATH="${NETBIRD_PEER_PATH:-/pulse}"
 
 # Swatch-Beat: Biel Mean Time, 1 Beat = 86.4s
 swatch_beat() {
@@ -42,7 +44,7 @@ dynasty_beat() {
   echo $((10225000 + days * 1000))
 }
 
-echo "[indigo] Node $NODE_ID bootet v3.2 — $COLOR_PRIMARY auf $COLOR_SECONDARY"
+echo "[indigo] Node $NODE_ID bootet v3.3 — $COLOR_PRIMARY auf $COLOR_SECONDARY"
 
 # Netbird-Status
 NETBIRD_OK=0
@@ -70,7 +72,7 @@ fi
 
 echo "[indigo] Puls startet auf Topic $TOPIC alle ${INTERVAL}s (Netbird=$NETBIRD_OK, Ygg=$YGG_OK)"
 if [ -n "$NETBIRD_PEER_IP" ]; then
-  echo "[indigo] Netbird-Push aktiv → $NETBIRD_PEER_IP"
+  echo "[indigo] Netbird-Push aktiv → http://${NETBIRD_PEER_IP}:${NETBIRD_PEER_PORT}${NETBIRD_PEER_PATH}"
 fi
 
 while true; do
@@ -103,7 +105,7 @@ while true; do
     "plane": "intrazell",
     "topic": "$TOPIC",
     "rune": "0x53",
-    "version": "v3.2"
+    "version": "v3.3"
   }
 }
 EOF
@@ -124,9 +126,19 @@ EOF
 }
 EOF
 
-  # Optionaler direkter Push, wenn Peer-IP gesetzt
+  # Konkreter Netbird-Push via HTTP POST
   if [ -n "$NETBIRD_PEER_IP" ] && [ "$NETBIRD_OK" -eq 1 ]; then
-    echo "[indigo] Push-Platzhalter → $NETBIRD_PEER_IP (Implementierung folgt)"
+    PUSH_URL="http://${NETBIRD_PEER_IP}:${NETBIRD_PEER_PORT}${NETBIRD_PEER_PATH}"
+    if command -v curl &>/dev/null; then
+      if curl -sS -m 5 -X POST -H "Content-Type: application/json" \
+           --data @"$ENVELOPE_FILE" "$PUSH_URL" >/dev/null 2>&1; then
+        echo "[indigo] Push OK → $PUSH_URL"
+      else
+        echo "[indigo] Push FAILED → $PUSH_URL"
+      fi
+    else
+      echo "[indigo] curl fehlt — Push nicht möglich"
+    fi
   fi
 
   echo "[indigo] Puls $TS — Swatch @$SB, Epochen $EB, Dynasty $DB"
