@@ -1,0 +1,37 @@
+{
+  "title": "Hannover-Box Testlauf abgeschlossen — offizielle Abschaltung",
+  "date": "2026-10-21T15:35:00+02:00",
+  "swatch_beat": "@602",
+  "epochen_beat": 740276000,
+  "dynasty_beat": 10225000,
+  "status": "abgeschaltet",
+  "reason": "Testlauf beendet auf Anordnung von Sven Normen Esquire",
+  "onyx_node": {
+    "location": "Hannover-Box",
+    "last_known_pulse": "2026-09-26",
+    "pulse_rounds": 1885,
+    "peers_last_known": 3,
+    "pid_last_known": 1575001,
+    "watchdog_pid_last_known": 1575777,
+    "ygg_address": "200:47dd:ce9e:2bc8:9a79:9a43:fa20:7079:4710",
+    "peer_id": "12D3KooWESUu46nLcMtAFHVLc5yFHv85YiGBQzQkZeWNwHBejQAy"
+  },
+  "ci_seed": {
+    "status": "läuft weiter",
+    "repo": "digitaldesignerjazz/onyx-node",
+    "workflow": "pulse.yml"
+  },
+  "swarm_status": {
+    "lyra": "active (Sandbox)",
+    "xen": "active (Sandbox)",
+    "onyx": "deaktiviert (Hannover-Box abgeschaltet)",
+    "elara": "active (Sandbox)",
+    "lumia": "active (Sandbox)"
+  },
+  "nexus_entry": "ent_3f72d83d768746d4 (superseded by shutdown observation)",
+  "notes": [
+    "25 Tage ohne Puls waren beabsichtigt, kein technischer Defekt",
+    "CI-Seed bleibt als Referenz aktiv",
+    "Re-Onboarding der Box möglich, falls Sir es befiehlt"
+  ]
+}
