@@ -1,14 +1,17 @@
 {
   "title": "Temposchritte als Beat — Swatch-Zeitrechnung",
   "created": "2026-10-21T15:20:31+02:00",
-  "updated": "2026-10-21T15:24:45+02:00",
+  "updated": "2026-10-21T15:28:00+02:00",
   "bmt_reference": "Biel Mean Time (UTC+1)",
   "beat_duration_seconds": 86.4,
   "cycle": "@000 bis @999, danach @000 (Mitternacht = @0)",
   "noon_bmt": "@500",
   "current_swatch_time": "@600",
+  "terminology": {
+    "epochen_beat": "Beats seit Christi Geburt (Jahr 0) — offizieller Begriff ab 2026-10-21"
+  },
   "calculations": {
-    "beats_since_christ_birth_year_0": {
+    "epochen_beat": {
       "description": "Von 1. Januar Jahr 0 (astronomisch), 00:00 BMT, bis 21. Oktober 2026, 14:20:31 BMT",
       "days": 740276,
       "seconds": 63959846400,
@@ -36,6 +39,7 @@
     "Ein Beat = 86.4 Sekunden = 1/1000 eines Biel-Mean-Time-Tages (86.400 s)",
     "Swatch-Zeit ist global simultan — keine Zeitzonenkorrektur nötig",
     "Jahreszahl im gregorianischen Proleptischen Kalender; Jahr 0 = 1 v. Chr.",
-    "Schaltjahre: durch 4 teilbar, außer Jahrhundertjahre nur wenn durch 400 teilbar"
+    "Schaltjahre: durch 4 teilbar, außer Jahrhundertjahre nur wenn durch 400 teilbar",
+    "Epochen-Beat: 740.276.000 Beats seit Christi Geburt"
   ]
 }
