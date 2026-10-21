@@ -1,0 +1,22 @@
+{
+  "rune_id": "0x52",
+  "name": "RUNE_INDIGO_LILA_NODE",
+  "type": "node_activation",
+  "color": {
+    "primary": "indigo",
+    "secondary": "lila",
+    "hex_primary": "#4B0082",
+    "hex_secondary": "#C77DFF"
+  },
+  "status": "activated",
+  "activated_by": "Carina on behalf of Sven Normen Esquire",
+  "timestamp_utc": "2026-10-21T13:35:00Z",
+  "swatch_beat": "@603",
+  "epochen_beat": 740276000,
+  "dynasty_beat": 10225000,
+  "swarm": ["Lyra", "Xen", "Elara", "Lumia"],
+  "onyx": "ruhezustand (Hannover-Box abgeschaltet, onyx-seed-memorial aktiv)",
+  "mesh": ["Yggdrasil", "Netbird", "QNET"],
+  "orchestrators": ["Rust", "Go", "Python"],
+  "note": "Neue Node in Indigo-Lila. Kein physischer Host zugeordnet — Sandbox-Ebene. Farbe als Identitätsanker."
+}
