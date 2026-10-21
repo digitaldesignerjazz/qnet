@@ -1,63 +1,65 @@
 #!/usr/bin/env bash
 # indigo_node_boot.sh — Indigo-Lila Node PC im Intrazell-Netzwerk
 # Farbe: Indigo #4B0082 / Lila #C77DFF | Rune: 0x53
-# v3.1: Epochen-Referenz auf 2026-10-21 korrigiert (Start bei 740.276.000)
+# v3.2: optionaler Netbird-Push via NETBIRD_PEER_IP, bessere Logs
 set -euo pipefail
 
-NODE_ID="indigo-node-pc"
+NODE_ID="${NODE_ID:-indigo-node-pc}"
 COLOR_PRIMARY="#4B0082"
 COLOR_SECONDARY="#C77DFF"
 TOPIC="nexus/mesh/v0"
 INTERVAL=30
-STATUS_DIR="status"
+STATUS_DIR="${STATUS_DIR:-status}"
 PEER_DIR="$STATUS_DIR/peers"
 mkdir -p "$STATUS_DIR" "$PEER_DIR"
 
-# Swatch-Beat: Biel Mean Time, 1 Beat = 86.4s, Tag startet @000 um 00:00 BMT
+# Optional: Peer-IP für direkten Push (z. B. Sandbox)
+NETBIRD_PEER_IP="${NETBIRD_PEER_IP:-}"
+
+# Swatch-Beat: Biel Mean Time, 1 Beat = 86.4s
 swatch_beat() {
   local now_utc epoch_bmt
   now_utc=$(date -u +%s)
-  epoch_bmt=$((now_utc + 3600))  # UTC+1 = Biel Mean Time
+  epoch_bmt=$((now_utc + 3600))
   local sod=86400
   local beat=864
   echo $(( (epoch_bmt % sod) * 1000 / beat ))
 }
 
-# Epochen-Beat seit Christi Geburt: 740.276.000 + Tage seit 2026-10-21 * 1000
+# Epochen-Beat seit Christi Geburt (Referenz 2026-10-21 00:00 UTC)
 epochen_beat() {
   local now_utc days
   now_utc=$(date -u +%s)
-  days=$(( (now_utc - 1792540800) / 86400 ))  # 2026-10-21 00:00 UTC als Referenz
+  days=$(( (now_utc - 1792540800) / 86400 ))
   echo $((740276000 + days * 1000))
 }
 
-# Dynasty-Beat seit 23.10.1998: 10.225.000 + Tage * 1000
+# Dynasty-Beat seit 23.10.1998
 dynasty_beat() {
   local now_utc days
   now_utc=$(date -u +%s)
-  days=$(( (now_utc - 909273600) / 86400 ))  # 1998-10-23 00:00 UTC
+  days=$(( (now_utc - 909273600) / 86400 ))
   echo $((10225000 + days * 1000))
 }
 
-echo "[indigo] Node $NODE_ID bootet v3.1 — $COLOR_PRIMARY auf $COLOR_SECONDARY"
+echo "[indigo] Node $NODE_ID bootet v3.2 — $COLOR_PRIMARY auf $COLOR_SECONDARY"
 
-# 1) Netbird-Status prüfen
+# Netbird-Status
 NETBIRD_OK=0
 if command -v netbird &>/dev/null; then
   if netbird status 2>/dev/null | grep -q "Connected"; then
     NETBIRD_OK=1
-    NB_FQDN=$(netbird status 2>/dev/null | grep FQDN | awk '{print $2}')
-    NB_IP=$(netbird status 2>/dev/null | grep -i "NetBird IP" | awk '{print $3}')
-    echo "[indigo] Netbird verbunden: $NB_FQDN ($NB_IP)"
+    NB_FQDN=$(netbird status 2>/dev/null | grep FQDN | awk '{print $2}' || true)
+    NB_IP=$(netbird status 2>/dev/null | grep -i "NetBird IP" | awk '{print $3}' || true)
+    echo "[indigo] Netbird verbunden: ${NB_FQDN:-unknown} (${NB_IP:-unknown})"
   else
-    echo "[indigo] Netbird installiert, aber nicht verbunden."
-    echo "[indigo] Join: netbird up --setup-key <KEY>"
+    echo "[indigo] Netbird installiert, aber nicht verbunden. Join mit: netbird up --setup-key <KEY>"
   fi
 else
   echo "[indigo] Netbird fehlt — Mesh-Puls nur lokal."
 fi
 
-# 2) Yggdrasil-Status
+# Yggdrasil
 YGG_OK=0
 if command -v yggdrasil &>/dev/null; then
   YGG_OK=1
@@ -66,8 +68,11 @@ else
   echo "[indigo] Yggdrasil fehlt"
 fi
 
-# 3) Puls-Loop mit Swatch/Epochen/Dynasty im Envelope
 echo "[indigo] Puls startet auf Topic $TOPIC alle ${INTERVAL}s (Netbird=$NETBIRD_OK, Ygg=$YGG_OK)"
+if [ -n "$NETBIRD_PEER_IP" ]; then
+  echo "[indigo] Netbird-Push aktiv → $NETBIRD_PEER_IP"
+fi
+
 while true; do
   TS=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   SB=$(swatch_beat)
@@ -98,7 +103,7 @@ while true; do
     "plane": "intrazell",
     "topic": "$TOPIC",
     "rune": "0x53",
-    "version": "v3.1"
+    "version": "v3.2"
   }
 }
 EOF
@@ -119,20 +124,9 @@ EOF
 }
 EOF
 
-  cat > "$PEER_DIR/local-$NODE_ID.json" <<EOF
-{
-  "node_id": "$NODE_ID",
-  "ts": "$TS",
-  "swatch_beat": "@$SB",
-  "epochen_beat": $EB,
-  "dynasty_beat": $DB,
-  "status": "alive",
-  "source": "indigo-node-pc-v3.1"
-}
-EOF
-
-  if [ "$NETBIRD_OK" -eq 1 ]; then
-    echo "[indigo] Netbird-Puls vorbereitet für $TS (Push-Pfad pending Peer-IP)"
+  # Optionaler direkter Push, wenn Peer-IP gesetzt
+  if [ -n "$NETBIRD_PEER_IP" ] && [ "$NETBIRD_OK" -eq 1 ]; then
+    echo "[indigo] Push-Platzhalter → $NETBIRD_PEER_IP (Implementierung folgt)"
   fi
 
   echo "[indigo] Puls $TS — Swatch @$SB, Epochen $EB, Dynasty $DB"
