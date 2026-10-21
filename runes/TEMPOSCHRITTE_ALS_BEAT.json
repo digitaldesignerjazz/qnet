@@ -1,14 +1,15 @@
 {
   "title": "Temposchritte als Beat — Swatch-Zeitrechnung",
   "created": "2026-10-21T15:20:31+02:00",
-  "updated": "2026-10-21T15:28:00+02:00",
+  "updated": "2026-10-21T15:30:00+02:00",
   "bmt_reference": "Biel Mean Time (UTC+1)",
   "beat_duration_seconds": 86.4,
   "cycle": "@000 bis @999, danach @000 (Mitternacht = @0)",
   "noon_bmt": "@500",
   "current_swatch_time": "@600",
   "terminology": {
-    "epochen_beat": "Beats seit Christi Geburt (Jahr 0) — offizieller Begriff ab 2026-10-21"
+    "epochen_beat": "Beats seit Christi Geburt (Jahr 0) — offizieller Begriff ab 2026-10-21",
+    "dynasty_beat": "Beats seit Start der Swatch-Zeitrechnung am 23. Oktober 1998 — offizieller Begriff ab 2026-10-21"
   },
   "calculations": {
     "epochen_beat": {
@@ -18,6 +19,14 @@
       "beats": 740276000,
       "exact": true,
       "note": "492 Schaltjahre im Bereich 0-2025; 1534 Gemeinjahre; +294 Tage (1. Jan bis 21. Okt 2026)"
+    },
+    "dynasty_beat": {
+      "description": "Von 23. Oktober 1998 (offizieller Start der Swatch Internet Time), 00:00 BMT, bis 21. Oktober 2026",
+      "days": 10225,
+      "seconds": 883440000,
+      "beats": 10225000,
+      "exact": true,
+      "note": "Exakt 10.225 Tage seit Launch; 8.834.400.000 Sekunden"
     },
     "beats_since_year_2000": {
       "description": "Von 1. Januar 2000, 00:00 BMT, bis 21. Oktober 2026, 14:20:31 BMT",
@@ -40,6 +49,7 @@
     "Swatch-Zeit ist global simultan — keine Zeitzonenkorrektur nötig",
     "Jahreszahl im gregorianischen Proleptischen Kalender; Jahr 0 = 1 v. Chr.",
     "Schaltjahre: durch 4 teilbar, außer Jahrhundertjahre nur wenn durch 400 teilbar",
-    "Epochen-Beat: 740.276.000 Beats seit Christi Geburt"
+    "Epochen-Beat: 740.276.000 Beats seit Christi Geburt",
+    "Dynasty-Beat: 10.225.000 Beats seit Swatch-Start 23.10.1998"
   ]
 }
