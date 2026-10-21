@@ -1,0 +1,40 @@
+{
+  "title": "Temposchritte als Beat — Swatch-Zeitrechnung",
+  "created": "2026-10-21T15:20:31+02:00",
+  "bmt_reference": "Biel Mean Time (UTC+1)",
+  "beat_duration_seconds": 86.4,
+  "cycle": "@000 bis @999, danach @000 (Mitternacht = @0)",
+  "noon_bmt": "@500",
+  "current_swatch_time": "@597",
+  "calculations": {
+    "beats_since_christ_birth_year_0": {
+      "description": "Von 1. Januar Jahr 0 (astronomisch), 00:00 BMT, bis 21. Oktober 2026, 14:20:31 BMT",
+      "days": 740276,
+      "seconds": 63959846400,
+      "beats": 740276000,
+      "exact": true,
+      "note": "492 Schaltjahre im Bereich 0-2025; 1534 Gemeinjahre; +294 Tage (1. Jan bis 21. Okt 2026)"
+    },
+    "beats_since_year_2000": {
+      "description": "Von 1. Januar 2000, 00:00 BMT, bis 21. Oktober 2026, 14:20:31 BMT",
+      "seconds": 845907631.0,
+      "beats": 9790597.581018519,
+      "beats_integer": 9790597,
+      "fractional_beat": 0.5810185186564922
+    }
+  },
+  "conversion_rules": {
+    "bmt_to_beats": "Sekunden seit Mitternacht BMT geteilt durch 86.4",
+    "beats_to_bmt_seconds": "Beats mal 86.4",
+    "@400_bmt": "16:30 BMT",
+    "@500_bmt": "12:00 BMT (Mittag)",
+    "remaining_beats_to_midnight_from_597": 403,
+    "percent_of_day_remaining_from_597": 40.3
+  },
+  "notes": [
+    "Ein Beat = 86.4 Sekunden = 1/1000 eines Biel-Mean-Time-Tages (86.400 s)",
+    "Swatch-Zeit ist global simultan — keine Zeitzonenkorrektur nötig",
+    "Jahreszahl im gregorianischen Proleptischen Kalender; Jahr 0 = 1 v. Chr.",
+    "Schaltjahre: durch 4 teilbar, außer Jahrhundertjahre nur wenn durch 400 teilbar"
+  ]
+}
