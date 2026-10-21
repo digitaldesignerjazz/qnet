@@ -8,16 +8,16 @@
     "hex_primary": "#4B0082",
     "hex_secondary": "#C77DFF"
   },
-  "status": "pending_boot",
+  "status": "sandbox_test_pulse",
   "target": "PC im Intrazell-Netzwerk",
   "activated_by": "Carina on behalf of Sven Normen Esquire",
-  "timestamp_utc": "2026-10-21T13:40:00Z",
-  "swatch_beat": "@604",
+  "timestamp_utc": "2026-10-21T13:48:13Z",
+  "swatch_beat": "@612",
   "epochen_beat": 740276000,
   "dynasty_beat": 10225000,
   "startup_script": "scripts/indigo_node_boot.sh",
   "mesh": ["Netbird", "Yggdrasil", "QNET"],
   "pulse_topic": "nexus/mesh/v0",
   "pulse_interval_sec": 30,
-  "note": "Indigo-Node-PC im Intrazell-Netzwerk. Boot per scripts/indigo_node_boot.sh. Farbe als Identitätsanker. Onyx ruht weiter."
+  "note": "Sandbox-Testpuls erzeugt (node_id: indigo-node-sandbox-test). Kein Netbird in dieser Umgebung. Physischer Boot auf Ziel-PC weiterhin erforderlich. Peer-Liste: leer (kein Mesh-Join)."
 }
