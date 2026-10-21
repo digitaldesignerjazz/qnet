@@ -3,6 +3,7 @@
 **Rune:** 0x53  
 **Farbe:** Indigo `#4B0082` / Lila `#C77DFF`  
 **Status:** pending_boot  
+**Skript-Version:** v3.3 (konkreter Netbird-HTTP-Push)
 
 ## 1. Voraussetzungen auf dem Ziel-PC
 
@@ -12,8 +13,8 @@ curl -fsSL https://pkgs.netbird.io/install.sh | sh
 # Setup-Key vom Mesh-Admin holen und joinen:
 netbird up --setup-key <SETUP_KEY>
 
-# Optional: Yggdrasil
-# (siehe yggdrasil-go Installationsanleitung)
+# curl muss vorhanden sein für den Push
+command -v curl || sudo apt install curl   # oder entsprechend
 ```
 
 ## 2. Skript installieren
@@ -28,7 +29,13 @@ sudo chmod +x /opt/indigo-node/indigo_node_boot.sh
 
 ```bash
 sudo cp scripts/indigo-node.service /etc/systemd/system/
-# User anpassen falls nötig (Standard: der User, der den Dienst startet)
+# Optional: Peer-IP setzen (in der Unit oder via override)
+# sudo systemctl edit indigo-node.service
+# [Service]
+# Environment=NETBIRD_PEER_IP=100.x.y.z
+# Environment=NETBIRD_PEER_PORT=8080
+# Environment=NETBIRD_PEER_PATH=/pulse
+
 sudo systemctl daemon-reload
 sudo systemctl enable --now indigo-node.service
 sudo systemctl status indigo-node.service
@@ -38,16 +45,33 @@ journalctl -u indigo-node.service -f
 ## 4. Manueller Testlauf (ohne Dienst)
 
 ```bash
+# Mit Push (Peer-IP bekannt):
+NETBIRD_PEER_IP=100.x.y.z ./scripts/indigo_node_boot.sh
+
+# Nur lokal:
 ./scripts/indigo_node_boot.sh
-# Erwartete Ausgabe: Puls mit Swatch @xxx, Epochen-Beat, Dynasty-Beat
-# Dateien: status/last_pulse.json, status/last_mesh_envelope.json
 ```
 
-## 5. Validierung
+## 5. Peer-IP-Integration (v3.3)
 
-- `status/last_pulse.json` enthält `"swatch_beat"`, `"epochen_beat"`, `"dynasty_beat"`.
-- Netbird-Status erscheint in den Logs, sobald verbunden.
-- Topic: `nexus/mesh/v0` (Push noch pending, sobald Peer-IP bekannt — via `NETBIRD_PEER_IP` Environment).
+Wenn `NETBIRD_PEER_IP` gesetzt ist und Netbird verbunden ist, wird jedes Envelope per **HTTP POST** gesendet:
+
+```
+POST http://$NETBIRD_PEER_IP:$NETBIRD_PEER_PORT$NETBIRD_PEER_PATH
+Content-Type: application/json
+Body: last_mesh_envelope.json
+```
+
+- Default-Port: `8080`
+- Default-Path: `/pulse`
+- Timeout: 5 s
+- Erfolg/Fehler wird geloggt (`Push OK` / `Push FAILED`)
+
+## 6. Validierung
+
+- `status/last_pulse.json` enthält Swatch-, Epochen- und Dynasty-Beat.
+- Bei gesetzter Peer-IP: Journal zeigt `Push OK` oder `Push FAILED`.
+- Topic: `nexus/mesh/v0`.
 
 ## Hinweise
 
