@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # indigo_node_boot.sh — Indigo-Lila Node PC im Intrazell-Netzwerk
 # Farbe: Indigo #4B0082 / Lila #C77DFF | Rune: 0x53
-# v3: Swatch-Zeit + Epochen-Beat + Dynasty-Beat im Puls-Envelope
+# v3.1: Epochen-Referenz auf 2026-10-21 korrigiert (Start bei 740.276.000)
 set -euo pipefail
 
 NODE_ID="indigo-node-pc"
@@ -27,7 +27,7 @@ swatch_beat() {
 epochen_beat() {
   local now_utc days
   now_utc=$(date -u +%s)
-  days=$(( (now_utc - 1708387200) / 86400 ))  # 2024-02-20 00:00 UTC als Referenz
+  days=$(( (now_utc - 1792540800) / 86400 ))  # 2026-10-21 00:00 UTC als Referenz
   echo $((740276000 + days * 1000))
 }
 
@@ -39,7 +39,7 @@ dynasty_beat() {
   echo $((10225000 + days * 1000))
 }
 
-echo "[indigo] Node $NODE_ID bootet v3 — $COLOR_PRIMARY auf $COLOR_SECONDARY"
+echo "[indigo] Node $NODE_ID bootet v3.1 — $COLOR_PRIMARY auf $COLOR_SECONDARY"
 
 # 1) Netbird-Status prüfen
 NETBIRD_OK=0
@@ -98,7 +98,7 @@ while true; do
     "plane": "intrazell",
     "topic": "$TOPIC",
     "rune": "0x53",
-    "version": "v3"
+    "version": "v3.1"
   }
 }
 EOF
@@ -127,7 +127,7 @@ EOF
   "epochen_beat": $EB,
   "dynasty_beat": $DB,
   "status": "alive",
-  "source": "indigo-node-pc-v3"
+  "source": "indigo-node-pc-v3.1"
 }
 EOF
 
