@@ -1,11 +1,12 @@
 {
   "title": "Temposchritte als Beat — Swatch-Zeitrechnung",
   "created": "2026-10-21T15:20:31+02:00",
+  "updated": "2026-10-21T15:24:45+02:00",
   "bmt_reference": "Biel Mean Time (UTC+1)",
   "beat_duration_seconds": 86.4,
   "cycle": "@000 bis @999, danach @000 (Mitternacht = @0)",
   "noon_bmt": "@500",
-  "current_swatch_time": "@597",
+  "current_swatch_time": "@600",
   "calculations": {
     "beats_since_christ_birth_year_0": {
       "description": "Von 1. Januar Jahr 0 (astronomisch), 00:00 BMT, bis 21. Oktober 2026, 14:20:31 BMT",
@@ -28,8 +29,8 @@
     "beats_to_bmt_seconds": "Beats mal 86.4",
     "@400_bmt": "16:30 BMT",
     "@500_bmt": "12:00 BMT (Mittag)",
-    "remaining_beats_to_midnight_from_597": 403,
-    "percent_of_day_remaining_from_597": 40.3
+    "remaining_beats_to_midnight_from_600": 400,
+    "percent_of_day_remaining_from_600": 40.0
   },
   "notes": [
     "Ein Beat = 86.4 Sekunden = 1/1000 eines Biel-Mean-Time-Tages (86.400 s)",
