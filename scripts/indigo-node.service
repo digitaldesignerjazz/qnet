@@ -1,0 +1,24 @@
+[Unit]
+Description=Indigo-Lila Node (Intrazell / Nexus Mesh)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/opt/indigo-node
+ExecStart=/opt/indigo-node/indigo_node_boot.sh
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=indigo-node
+
+# Optional environment
+Environment=NODE_ID=indigo-node-pc
+# Environment=NETBIRD_PEER_IP=100.x.y.z   # uncomment and set when known
+
+[Install]
+WantedBy=multi-user.target
