@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # indigo_node_boot.sh — Indigo-Lila Node PC im Intrazell-Netzwerk
 # Farbe: Indigo #4B0082 / Lila #C77DFF | Rune: 0x53
-# v3.3: konkreter Netbird HTTP-Push (curl POST) über Peer-IP
+# v3.4: Swatch-Beat = (BMT-Sekunde % 86400) * 1000 / 86400. v3.3 teilte durch 864 und lag 100× daneben.
 set -euo pipefail
 
 NODE_ID="${NODE_ID:-indigo-node-pc}"
+PLANE="${PLANE:-intrazell}"
+HOST_NAME="${INDIGO_HOST:-$(hostname 2>/dev/null || echo unknown)}"
 COLOR_PRIMARY="#4B0082"
 COLOR_SECONDARY="#C77DFF"
 TOPIC="nexus/mesh/v0"
@@ -24,8 +26,7 @@ swatch_beat() {
   now_utc=$(date -u +%s)
   epoch_bmt=$((now_utc + 3600))
   local sod=86400
-  local beat=864
-  echo $(( (epoch_bmt % sod) * 1000 / beat ))
+  echo $(( (epoch_bmt % sod) * 1000 / sod ))
 }
 
 # Epochen-Beat seit Christi Geburt (Referenz 2026-10-21 00:00 UTC)
@@ -44,7 +45,7 @@ dynasty_beat() {
   echo $((10225000 + days * 1000))
 }
 
-echo "[indigo] Node $NODE_ID bootet v3.3 — $COLOR_PRIMARY auf $COLOR_SECONDARY"
+echo "[indigo] Node $NODE_ID bootet v3.4 — $COLOR_PRIMARY auf $COLOR_SECONDARY"
 
 # Netbird-Status
 NETBIRD_OK=0
@@ -99,13 +100,14 @@ while true; do
     "local": true
   },
   "extra": {
-    "prototype": "Indigo Node PC",
+    "prototype": "Indigo Node",
+    "host": "$HOST_NAME",
     "color_primary": "$COLOR_PRIMARY",
     "color_secondary": "$COLOR_SECONDARY",
-    "plane": "intrazell",
+    "plane": "$PLANE",
     "topic": "$TOPIC",
     "rune": "0x53",
-    "version": "v3.3"
+    "version": "v3.4"
   }
 }
 EOF
