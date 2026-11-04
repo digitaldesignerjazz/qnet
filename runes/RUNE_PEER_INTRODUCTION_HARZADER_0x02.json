@@ -1,0 +1,21 @@
+{
+  "opcode": "0x02",
+  "name": "RUNE_PEER_INTRODUCTION",
+  "version": "0.1",
+  "rune_id": "rune-peer-intro-harzader-20261104T111315Z",
+  "timestamp": "2026-11-04T11:13:15Z",
+  "status": "signed-ready",
+  "parameters": {
+    "introducer_fingerprint": "node-a",
+    "new_peer_fingerprint": "Harzader",
+    "connection_proof": "sha256:104641b508a440dca3af4a338bf9b1ee18ce37e04846e3722fec7c33bbcd1144",
+    "timestamp": "2026-11-04T11:13:15Z",
+    "node_name": "Harzader",
+    "registration": "online",
+    "distribution": "all-peers"
+  },
+  "signatures": {
+    "netbird_signature": "local-test-unsigned",
+    "kyber_signature": "local-test-unsigned"
+  }
+}
