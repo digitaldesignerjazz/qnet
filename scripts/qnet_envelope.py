@@ -56,6 +56,9 @@ OPCODES: dict[str, dict[str, Any]] = {
                 ["anchor_type", "content_hash"], ["emotional_valence", "linked_entities", "signature"]),
     "0x51": _op("RUNE_MUSIC_PROMPT_MINT", "creative", False,
                 ["prompt_hash", "style_tags", "generation_proof"], ["linked_narrative_anchor"]),
+    # Lokaler Vorschlag (04.11.2026, Sven): rein symbolisch, ledger-intern, keine reale Wirkung.
+    "0x90": _op("RUNE_COMMAND_REVOCATION_SYMBOLIC", "symbolic", False,
+                ["subjects", "statement", "scope", "timestamp"], ["note"]),
 }
 NAME_TO_OPCODE = {spec["name"]: hex_id for hex_id, spec in OPCODES.items()}
 
