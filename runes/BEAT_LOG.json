@@ -1,8 +1,8 @@
 {
-  "timestamp_berlin": "2026-11-09T17:05:16.150506+01:00",
-  "bmt": "17:05:16",
-  "swatch_beat": "@711",
+  "timestamp_berlin": "2026-11-09T18:06:38.903500+01:00",
+  "bmt": "18:06:38",
+  "swatch_beat": "@754",
   "beat_duration_seconds": 86.4,
-  "remaining_beats_to_midnight": 289,
-  "percent_day_remaining": 28.9
+  "remaining_beats_to_midnight": 246,
+  "percent_day_remaining": 24.6
 }
